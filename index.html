@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicate — A Birthday Experience</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Canvas for Particles -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- Audio Player Controls -->
+    <div class="audio-control-wrapper" id="audio-wrapper">
+        <button id="audio-toggle" class="glass-btn icon-btn" aria-label="Toggle Background Music">
+            <span id="audio-icon">🎵</span>
+        </button>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5" aria-label="Volume Slider">
+        <audio id="bg-music" loop preload="auto">
+            <source src="assets/audio/music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Main Story Experience Container -->
+    <main id="app-container" role="main">
+
+        <!-- SCREEN 1: OPENING -->
+        <section id="screen-1" class="screen active" data-step="1">
+            <div class="content-wrapper text-center">
+                <p class="subtitle fade-in">A moment created just for you</p>
+                <h1 class="title-cinematic fade-in-delay-1">Something special is waiting for you…</h1>
+                <button id="btn-start" class="btn-primary glow-effect fade-in-delay-2">
+                    <span>Open it ✨</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: BIRTHDAY REVEAL -->
+        <section id="screen-2" class="screen hidden" data-step="2">
+            <div class="content-wrapper text-center">
+                <h2 class="title-large text-gradient" id="reveal-title">Happy Birthday, Delicate! 🎂✨</h2>
+                <p class="subtitle-large fade-in-delay-1">Today isn't just another day.</p>
+                <p class="body-text fade-in-delay-2">It's a celebration of your presence, your light, and the quiet magic you bring into the world.</p>
+                <button class="btn-secondary next-step-btn fade-in-delay-3" data-next="3">
+                    <span>Continue 🌸</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: BIRTHDAY MESSAGE -->
+        <section id="screen-3" class="screen hidden" data-step="3">
+            <div class="content-wrapper">
+                <div class="glass-card flex-center">
+                    <h3 class="card-title">To Someone Remarkable</h3>
+                    <div class="card-divider"></div>
+                    <p class="card-body" id="birthday-message-text">
+                        Wishing you boundless happiness, serene peace, and unwavering confidence as you step into this new chapter. May all your quietest dreams find their path to reality, and may every day remind you of how extraordinary you truly are.
+                    </p>
+                    <button class="btn-secondary next-step-btn" data-next="4">
+                        <span>Walk Through Memories 💫</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 4: MEMORY / MOMENTS -->
+        <section id="screen-4" class="screen hidden" data-step="4">
+            <div class="content-wrapper">
+                <h2 class="section-title text-center">Cherished Moments</h2>
+                <p class="section-subtitle text-center">Click a card to uncover a memory</p>
+                
+                <div class="memory-grid" id="memory-grid">
+                    <!-- Dynamic memory cards populated by JS -->
+                </div>
+
+                <div class="text-center margin-top-lg">
+                    <button class="btn-secondary next-step-btn" data-next="5">
+                        <span>Make a Wish 🌙</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 5: INTERACTIVE CAKE -->
+        <section id="screen-5" class="screen hidden" data-step="5">
+            <div class="content-wrapper text-center">
+                <h2 class="section-title">A Birthday Wish</h2>
+                <p class="section-subtitle" id="cake-instruction">Blow or click the candle to make your wish ✨</p>
+                
+                <div class="cake-container" id="cake-interactive" role="button" tabindex="0" aria-label="Interactive Birthday Cake">
+                    <div class="candle">
+                        <div class="flame" id="flame"></div>
+                    </div>
+                    <div class="cake">
+                        <div class="plate"></div>
+                        <div class="layer layer-bottom"></div>
+                        <div class="layer layer-middle"></div>
+                        <div class="layer layer-top"></div>
+                        <div class="icing"></div>
+                    </div>
+                </div>
+
+                <div id="wish-outcome" class="hidden fade-in">
+                    <p class="subtitle-large text-gradient margin-bottom-md">Wish made? 🌙</p>
+                    <button class="btn-secondary next-step-btn" data-next="6">
+                        <span>Look to the Future 🚀</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 6: BMW / DREAM WISH -->
+        <section id="screen-6" class="screen hidden" data-step="6">
+            <div class="content-wrapper text-center">
+                <p class="subtitle">A little wish for your future… ✨</p>
+                <div class="luxury-car-card glass-card">
+                    <div class="car-light-stream"></div>
+                    <p class="poem-text">
+                        “May your dreams get bigger,<br>
+                        your hard work take you farther,<br>
+                        and one day, may that <strong>BMW</strong> you've always wanted<br>
+                        be waiting in your driveway. 🚘💗<br><br>
+                        <em>You deserve to see your dreams become real.</em>”
+                    </p>
+                </div>
+                <button class="btn-secondary next-step-btn margin-top-lg" data-next="7">
+                    <span>The Next Chapter 📚</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 7: 12TH 2027 / TOPPER MODE -->
+        <section id="screen-7" class="screen hidden" data-step="7">
+            <div class="content-wrapper text-center">
+                <p class="subtitle">And then comes another big chapter… 📚✨</p>
+                <div class="glass-card margin-bottom-lg">
+                    <p class="body-text">
+                        12th is going to be a big chapter. Keep believing in yourself, keep working hard, and don't forget to enjoy the little moments along the way.
+                    </p>
+                    <div class="achievement-badge margin-top-md" id="topper-badge">
+                        <span class="badge-icon">🏆</span>
+                        <span class="badge-text">TOPPER MODE: ON 🚀</span>
+                    </div>
+                </div>
+                <button class="btn-secondary next-step-btn" data-next="8">
+                    <span>One Last Thing… 💖</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 8: QUESTION -->
+        <section id="screen-8" class="screen hidden" data-step="8">
+            <div class="content-wrapper text-center">
+                <h2 class="title-cinematic fade-in">Can I ask you something?</h2>
+                <p class="subtitle-large fade-in-delay-1 margin-bottom-lg">Do you have any feelings for me? 💖</p>
+                <div class="choice-container fade-in-delay-2">
+                    <button class="btn-choice" data-choice="yes">Yes, I do 💗</button>
+                    <button class="btn-choice" data-choice="curious">Just curious 👀</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 9: CONFESSION -->
+        <section id="screen-9" class="screen hidden" data-step="9">
+            <div class="content-wrapper text-center">
+                <h2 class="section-title text-gradient margin-bottom-lg">I love you. ❤️</h2>
+                <p class="subtitle margin-bottom-lg" id="love-prompt">Do you want to know how much I love you? 💖</p>
+                
+                <button id="btn-reveal-love" class="btn-primary glow-effect margin-bottom-lg">Tap to see ✨</button>
+
+                <div class="lines-container hidden" id="love-lines">
+                    <p class="line">I loved you without meeting you.</p>
+                    <p class="line">I loved you without touching you.</p>
+                    <p class="line">I loved you without even a single hug.</p>
+                    <p class="line">I loved you without holding your hands.</p>
+                    <p class="line">I loved you without seeing your smile.</p>
+                    <p class="line highlight">I loved you from far apart. ❤️</p>
+                </div>
+
+                <div class="reassurance-card glass-card hidden margin-top-lg" id="love-reassurance">
+                    <p class="body-text">I just wanted you to know.<br><strong>No pressure. No expectations.</strong></p>
+                    <button class="btn-secondary next-step-btn margin-top-md" data-next="10">
+                        <span>Continue 🤍</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 10: CLOSURE -->
+        <section id="screen-10" class="screen hidden" data-step="10">
+            <div class="content-wrapper text-center">
+                <p class="subtitle-large fade-in">Whatever happens next…<br>I'm glad I got to tell you. 🤍</p>
+                <h1 class="title-large text-gradient fade-in-delay-1 margin-top-md">Happy Birthday, Delicate. ✨</h1>
+                <div class="final-wish-box fade-in-delay-2 margin-top-lg">
+                    <p class="poem-text">
+                        Keep smiling.<br>
+                        Keep dreaming.<br>
+                        Keep becoming everything you want to be.
+                    </p>
+                </div>
+                <div class="heart-glow margin-top-lg"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Navigation Controls -->
+    <nav class="nav-controls" aria-label="Experience Navigation">
+        <button id="btn-prev" class="glass-btn icon-btn hidden" aria-label="Previous Screen">←</button>
+        <div id="progress-indicator" class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar-fill"></div>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
